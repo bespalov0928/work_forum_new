@@ -1,10 +1,10 @@
 package ru.work.forum.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.work.forum.persistence.AnswerStore;
-import ru.work.forum.persistence.PostStore;
+
 import ru.work.forum.service.AnswerService;
 import ru.work.forum.service.PostService;
 
@@ -22,6 +22,7 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("posts", postService.findAll());
         model.addAttribute("answers", answerService.findAll());
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "index";
     }
 

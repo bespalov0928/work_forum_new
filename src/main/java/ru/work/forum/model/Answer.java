@@ -19,6 +19,10 @@ public class Answer {
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
+    public Answer() {
+    }
+
+
     public Answer(int id, String text) {
         this.id = id;
         this.text = text;

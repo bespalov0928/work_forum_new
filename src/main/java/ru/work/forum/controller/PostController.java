@@ -43,7 +43,8 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Post post, @ModelAttribute Answer answer){
+//    public String save(@ModelAttribute Post post, @ModelAttribute Answer answer){
+    public String save(@ModelAttribute Post post){
         User user = null;
         post.setUser(user);
         if (post.getId()==0){

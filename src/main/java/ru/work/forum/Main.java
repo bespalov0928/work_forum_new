@@ -8,25 +8,30 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
 import org.springframework.context.annotation.Bean;
 
+
+import javax.sql.DataSource;
+
 @SpringBootApplication
-public class Main {
+public class Main extends SpringBootServletInitializer {
+
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//        return application.sources(SpringApplicationBuilder.class);
+//    }
+
 
     @Bean(destroyMethod = "close")
-    public SessionFactory sf(){
+    public SessionFactory sf() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         return new MetadataSources(registry).buildMetadata().buildSessionFactory();
     }
 
 
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-//        return builder.sources(Main.class);
-//    }
 
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
 }

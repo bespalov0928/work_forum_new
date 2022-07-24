@@ -1,11 +1,12 @@
 package ru.work.forum.controller;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.work.forum.model.Authority;
+import ru.work.forum.model.Role;
 import ru.work.forum.model.User;
 import ru.work.forum.service.AuthorityService;
 import ru.work.forum.service.UserService;
@@ -15,10 +16,13 @@ public class RegController {
 
     private final UserService userService;
     private final AuthorityService authorityService;
+    private final PasswordEncoder passwordEncoder;
 
-    public RegController(UserService userService, AuthorityService authorityService) {
+
+    public RegController(UserService userService, AuthorityService authorityService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.authorityService = authorityService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/reg")
@@ -29,11 +33,12 @@ public class RegController {
             model.addAttribute("errorMessage", errorMessage);
             return "reg";
         }
+
         user.setEnabled(true);
-//        user.setAuthority(authorityService.findByAuthority("ROLE_USER"));
-        user.setPassword("");
-//            userService.save(user);
-        return "redirect:/login";
+        user.setRole(Role.USER);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.save(user);
+        return "login";
 
     }
 
