@@ -1,5 +1,6 @@
 package ru.work.forum;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -22,6 +23,13 @@ public class Main extends SpringBootServletInitializer {
 //        return application.sources(SpringApplicationBuilder.class);
 //    }
 
+    @Bean
+    public SpringLiquibase liquibase(DataSource ds) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:liquibase-changeLog.xml");
+        liquibase.setDataSource(ds);
+        return liquibase;
+    }
 
     @Bean(destroyMethod = "close")
     public SessionFactory sf() {
