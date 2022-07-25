@@ -29,7 +29,7 @@ public class PostService {
     }
 
     public void update(Post post){
-        postStore.save(post);
+        postStore.update(post);
     }
 
 }

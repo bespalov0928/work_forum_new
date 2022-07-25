@@ -34,7 +34,7 @@
                         <a class="nav-link" href="/create">Открыть новую тему</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">| Выйти</a>
+                        <a class="nav-link" href="/auth/logout">| Выйти</a>
                     </li>
                 </ul>
             </div>

@@ -20,7 +20,6 @@
 
         <mapping class="ru.work.forum.model.User" />
         <mapping class="ru.work.forum.model.Post" />
-        <mapping class="ru.work.forum.model.Authority" />
         <mapping class="ru.work.forum.model.Answer" />
     </session-factory>
 </hibernate-configuration>
